@@ -1,0 +1,3 @@
+[submodule "app/portal-fiero"]
+	path = app/portal-fiero
+	url = https://github.com/CaianMorais/portal-fiero.git

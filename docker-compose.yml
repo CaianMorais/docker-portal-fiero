@@ -1,0 +1,29 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    container_name: portal-fiero-app
+    volumes:
+      - ./app/portal-fiero:/var/www/html/portal-fiero
+      - ./docker/apache/ports.conf:/etc/apache2/ports.conf
+      - ./docker/apache/default.conf:/etc/apache2/sites-available/000-default.conf
+    ports:
+      - "8002:8002"
+    depends_on:
+      - portal-fiero-db
+  portal-fiero-db:
+    image: mysql:8.0
+    container_name: portal-fiero-db
+    environment:
+      MYSQL_ROOT_PASSWORD: fn1d2f13r0
+      MYSQL_DATABASE: portal-fiero
+      MYSQL_USER: adinf
+      MYSQL_PASSWORD: fn1d2f13r0
+    ports:
+      - "3310:3306"
+    volumes:
+      - portal-fiero-db-data:/var/lib/mysql
+
+volumes:
+  portal-fiero-db-data:
